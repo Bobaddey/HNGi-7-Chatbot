@@ -1,7 +1,10 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap");
+
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: "Montserrat", sans-serif;
 }
 
 header {
@@ -33,6 +36,7 @@ main {
 main h1 {
   text-transform: uppercase;
   margin-bottom: 1rem;
+  letter-spacing: 0.2rem;
 }
 main h2 {
   margin-bottom: 1rem;
@@ -56,6 +60,9 @@ main h4 {
 }
 .btn:hover {
   opacity: 0.8;
+}
+#send {
+  padding: 0.5rem;
 }
 .close-btn {
   position: absolute;
@@ -97,10 +104,9 @@ main h4 {
   color: lightslategrey;
 }
 .chatbox-overlay input {
-  line-height: 2.5rem;
-  font-size: 18px;
+  line-height: 2rem;
+  font-size: 16px;
   border: none;
-  border-bottom: 4px solid honeydew;
   color: lightslategrey;
 }
 .chatbox-overlay input:focus {
@@ -108,7 +114,8 @@ main h4 {
 }
 .user-input {
   position: absolute;
-  bottom: 2rem;
+  bottom: 1rem;
+  right: 1rem;
 }
 .chatbox .bot {
   background-color: honeydew;

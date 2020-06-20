@@ -26,11 +26,16 @@ const userDetails = {
 let index = 0;
 
 //display bots questions
-function showResponse(index) {
+function showBotResponse(index) {
   let { name, username, track, stage, id } = userDetails;
   switch (index) {
     case 0:
-      chatbox.innerHTML += `<div class="bot">${questions[index]}</div>`;
+      if (chatbox.childElementCount > 0) {
+        break;
+      }
+      setTimeout(() => {
+        chatbox.innerHTML += `<div class="bot">${questions[index]}</div>`;
+      }, 1000);
       break;
     case 1:
       chatbox.innerHTML += `<div class="bot">Hi, <span>${name}</span>, ${questions[index]}</div>`;
@@ -39,7 +44,7 @@ function showResponse(index) {
       chatbox.innerHTML += `<div class="bot">That's a nice username <span> ${name}</span> , ${questions[index]}</div>`;
       break;
     case 3:
-      chatbox.innerHTML += `<div class="bot">Cool !, ${questions[index]}</div>`;
+      chatbox.innerHTML += `<div class="bot">Awesome!, ${questions[index]}</div>`;
       break;
     case 4:
       chatbox.innerHTML += `<div class="bot">Okay, just one more i promise, ${questions[index]}</div>`;
@@ -48,20 +53,27 @@ function showResponse(index) {
       chatbox.innerHTML += `<div class="bot">Thank you for your response <span>${name}</span>, Here's what i know <br> 
        You're <span>${name}</span>, HNG ID:<span> ${id}</span> , slack username:<span> ${username}</span> , on the <span>${track}</span> track, currently on stage<span> ${stage}</span>.</div>`;
       break;
+    case 6:
+      chatbox.innerHTML += `<div class="bot">
+      That would be all for now, please come again next time.</div>`;
+      userInput.disabled = true;
+      break;
     default:
       break;
   }
 }
 // display user input
 function showUserResponse() {
-  let response = userInput.value.trim();
-  chatbox.innerHTML += `<div class="user">${response}</div>`;
-  index++;
-  updateDetails(response.toUpperCase(), index);
-  setTimeout(() => {
-    showResponse(index);
-  }, 3000);
-  userInput.value = "";
+  if (userInput.value !== "") {
+    let response = userInput.value.trim();
+    chatbox.innerHTML += `<div class="user">${response}</div>`;
+    index++;
+    updateDetails(response.toUpperCase(), index);
+    setTimeout(() => {
+      showBotResponse(index);
+    }, 3000);
+    userInput.value = "";
+  }
 }
 
 // store user input in object
@@ -95,7 +107,7 @@ send.addEventListener("click", () => showUserResponse());
 talk.addEventListener("click", () => {
   container.classList.add("hide");
   chatboxOverlay.classList.add("show-chat");
-  showResponse(0);
+  showBotResponse(0);
 });
 
 //keyboard support for the enter key
